@@ -55,33 +55,32 @@ def absen():
         xpath_tombol_aktif = "//a[contains(@class, 'btn-danger') and .//i[contains(@class, 'fa-sign-in-alt')]]"
         
         try:
-            # Tunggu sampai setidaknya ada 1 tombol absen yang aktif
+            # tunggu >=1 tombol absen aktif
             WebDriverWait(driver, 240).until(
                 EC.presence_of_element_located((By.XPATH, xpath_tombol_aktif))
             )
             
-            # Hitung ada berapa jadwal yang harus diabsen saat ini
+            # berapa jadwal yang harus diabsen (yg jam nya sama)
             tombol_aktif = driver.find_elements(By.XPATH, xpath_tombol_aktif)
             jumlah_absen = len(tombol_aktif)
             print(f"Menemukan {jumlah_absen} jadwal untuk diabsen.")
 
-            # 2. Eksekusi sekaligus dalam satu sesi
+            # sekaligus satu sesi
             for i in range(jumlah_absen):
-                # HARUS dicari ulang setiap putaran untuk menghindari StaleElementReferenceException
                 tombol_sekarang = driver.find_elements(By.XPATH, xpath_tombol_aktif)[i]
                 
-                # Klik tombol absen utama
+                # Absen
                 WebDriverWait(driver, 10).until(EC.element_to_be_clickable(tombol_sekarang)).click()
                 print(f"Menekan tombol absen jadwal ke-{i+1}...")
                 
-                # 3. Tangani Pop-up SweetAlert: "Presensi"
+                # Presensi
                 xpath_btn_presensi = "//button[contains(@class, 'swal-button--confirm') and text()='Presensi']"
                 btn_presensi = WebDriverWait(driver, 10).until(
                     EC.element_to_be_clickable((By.XPATH, xpath_btn_presensi))
                 )
                 btn_presensi.click()
                 
-                # 4. Tangani Pop-up SweetAlert: "OK"
+                # OK
                 xpath_btn_ok = "//button[contains(@class, 'swal-button--confirm') and text()='OK']"
                 btn_ok = WebDriverWait(driver, 300).until(
                     EC.element_to_be_clickable((By.XPATH, xpath_btn_ok))
@@ -89,7 +88,7 @@ def absen():
                 btn_ok.click()
                 print(f"Absen jadwal ke-{i+1} sukses!")
                 
-                # Jeda sebentar sebelum lanjut ke jadwal berikutnya (jika ada)
+                # jeda dikit, kalo ada jadwal lain
                 time.sleep(2)
 
             return ResponAbsen(
@@ -98,7 +97,7 @@ def absen():
             )
 
         except Exception as e:
-            # Jika dalam 30 detik tidak ada elemen yang ditemukan, anggap belum waktunya absen
+            # timeout 30 detik
             raise HTTPException(status_code=400, detail=f"Gagal absen atau tombol belum aktif. Error: {str(e)}")
     except HTTPException as http_exc:
         raise http_exc
@@ -108,7 +107,7 @@ def absen():
         driver.quit()
 
 class JadwalRequest(BaseModel):
-    waktu_eksekusi: str  # Format wajib: "YYYY-MM-DD HH:MM:SS"
+    waktu_eksekusi: str  # "YYYY-MM-DD HH:MM:SS"
 
 @app.post("/api/schedule")
 def schedule_task(req: JadwalRequest):
@@ -140,8 +139,7 @@ def schedule_task(req: JadwalRequest):
     except ValueError:
         raise HTTPException(status_code=400, detail="Format waktu salah. Gunakan YYYY-MM-DD HH:MM:SS")
 
-    # Masukkan ke antrean Google
-    response = client.create_task(request={"parent": parent, "task": task})
+    response = client.create_task(request={"parent": parent, "task": task}) # buat debug aja
     
     return {
         "status": "success", 
