@@ -43,11 +43,11 @@ Masukan jadwal fix ke GC Scheduler
 - **Target URL** : `https://[URL-Cloud-Run]/api/absen`
 - **Method** : POST
 - Format jam pakai **cron** (Contoh : Selasa jam 7.30 -> `30 7 * * 2`)
-  Saran gua, beda hari atau jam berbeda dengan menit berbeda pakai Task terpisah (karena penulisan Cron is so fucking unflexible).
+  Saran gua, beda hari atau jam berbeda dengan menit berbeda pakai scheduler terpisah (karena penulisan Cron is so fucking unflexible).
 
 ### Mobile 
 Jam di luar jadwal (misal jadwal pengganti) utama bisa pakai **HTTP Shortcuts**
-1. Aktifkan **API Cloud Tasks**
+1. Aktifkan **API Cloud Tasks** di GC
 2. Bikin variabel baru (Input text)
 3. Bikin shortcut (Create from scratch)
     - **HTTP Method** : POST
