@@ -114,7 +114,7 @@ class JadwalRequest(BaseModel):
 def schedule_task(req: JadwalRequest):
     client = tasks_v2.CloudTasksClient()
     
-    # Konfigurasi project kamu
+    # config
     project = "selenium-absen-stupor"
     queue = "antrian-absen"
     location = "asia-southeast2"
@@ -129,7 +129,7 @@ def schedule_task(req: JadwalRequest):
         }
     }
 
-    # Konversi waktu WIB (input) ke UTC
+    # WIB -> UTC
     try:
         waktu_wib = datetime.datetime.strptime(req.waktu_eksekusi, "%Y-%m-%d %H:%M:%S")
         waktu_utc = waktu_wib - datetime.timedelta(hours=7)
