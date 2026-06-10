@@ -2,16 +2,15 @@
 **API otomasi absensi stupor UNPAR** 
 ~Program buat yang suka lupa absen (kayak gw)~
 
-> [!info]
-> Tech Stack :
-> - **Lib** : Selenium, FastAPI
-> - **Env** : GC Run, GC Scheduler, GC Tasks (mobile HTTP Shortcuts)
+Tech Stack :
+- **Lib** : Selenium, FastAPI
+- **Env** : GC Run, GC Scheduler, GC Tasks (mobile HTTP Shortcuts)
 
 ## Instalasi
 1. **Clone Repo**
 ```bash
-git clone 
-cd 
+git clone https://github.com/mkeaudric/otomasi-absen-stupor.git
+cd otomasi-absen-stupor
 ```
 
 2. **Instalasi Library**
