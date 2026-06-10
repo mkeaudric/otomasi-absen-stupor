@@ -1,6 +1,6 @@
 # Otomasi Absen Stupor
 **API otomasi absensi stupor UNPAR** 
-Program buat yang suka lupa absen (kayak gw)
+Program buat yang suka lupa absen
 
 Tech Stack :
 - **Lib** : Selenium, FastAPI
@@ -40,7 +40,7 @@ Pakai `1Gi` juga gpp
 ## Cara Pakai
 ### Desktop
 Masukan jadwal fix ke GC Scheduler
-- **Target URL** : `https://[URL-Cloud-Run-Lu]/api/absen`
+- **Target URL** : `https://[URL-Cloud-Run]/api/absen`
 - **Method** : POST
 - Format jam pakai **cron** (Contoh : Selasa jam 7.30 -> `30 7 * * 2`)
   Saran gua, beda hari atau jam berbeda dengan menit berbeda pakai Task terpisah (karena penulisan Cron is so fucking unflexible).
@@ -51,7 +51,7 @@ Jam di luar jadwal (misal jadwal pengganti) utama bisa pakai **HTTP Shortcuts**
 2. Bikin variabel baru (Input text)
 3. Bikin shortcut (Create from scratch)
     - **HTTP Method** : POST
-    - **URL** : link aplikasi yang di-deploy di GC
+    - **URL** : URL-Cloud-Run
     - **Request Body / Parameter** : `{ "waktu_eksekusi": "YYYY-MM-DD HH:MM:SS" }`
 4. Jalanin shortcut untuk membuat task baru.
 
