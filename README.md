@@ -1,6 +1,6 @@
-# Absensi-Stupor
+# Otomasi Absen Stupor
 **API otomasi absensi stupor UNPAR** 
-~Program buat yang suka lupa absen (kayak gw)~
+Program buat yang suka lupa absen (kayak gw)
 
 Tech Stack :
 - **Lib** : Selenium, FastAPI
