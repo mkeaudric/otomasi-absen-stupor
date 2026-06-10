@@ -1,0 +1,9 @@
+# env
+.env
+venv/
+
+# cache
+__pycache__/
+
+# others
+notes.txt
