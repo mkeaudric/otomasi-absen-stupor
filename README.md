@@ -1,5 +1,5 @@
 # Otomasi Absen Stupor
-**API otomasi absensi stupor UNPAR** 
+**API otomasi absensi stupor** 
 Program buat yang suka lupa absen
 
 Tech Stack :
@@ -42,8 +42,8 @@ Pakai `1Gi` juga gpp
 Masukan jadwal fix ke GC Scheduler
 - **Target URL** : `https://[URL-Cloud-Run]/api/absen`
 - **Method** : POST
-- Format jam pakai **cron** (Contoh : Selasa jam 7.30 -> `30 7 * * 2`)
-  Saran gua, beda hari atau jam berbeda dengan menit berbeda pakai scheduler terpisah (karena penulisan Cron is so fucking unflexible).
+- Format jam pakai **Cron job** (Contoh : Selasa jam 7.30 -> `30 7 * * 2`)
+  Saran gua, beda hari atau jam berbeda dengan menit berbeda pakai scheduler terpisah.
 
 ### Mobile 
 Jam di luar jadwal (misal jadwal pengganti) utama bisa pakai **HTTP Shortcuts**
